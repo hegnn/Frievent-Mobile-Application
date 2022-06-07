@@ -1,0 +1,48 @@
+{
+  "name": "Mobile",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@gorhom/bottom-sheet": "^4.3.0",
+    "@react-native-async-storage/async-storage": "^1.17.3",
+    "@react-native-community/datetimepicker": "^6.1.0",
+    "@react-native-picker/picker": "^2.4.0",
+    "@react-navigation/bottom-tabs": "^6.0.9",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/native-stack": "^6.2.5",
+    "axios": "^0.26.1",
+    "formik": "^2.2.9",
+    "react": "17.0.2",
+    "react-native": "0.68.2",
+    "react-native-date-picker": "^4.2.0",
+    "react-native-gesture-handler": "^2.4.0",
+    "react-native-reanimated": "^2.8.0",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.10.1",
+    "react-native-select-dropdown": "^1.8.0",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.4.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/runtime": "^7.18.3",
+    "@react-native-community/eslint-config": "^3.0.2",
+    "babel-jest": "^28.1.0",
+    "eslint": "^8.16.0",
+    "jest": "^28.1.0",
+    "metro-react-native-babel-preset": "^0.71.0",
+    "react-test-renderer": "17.0.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
