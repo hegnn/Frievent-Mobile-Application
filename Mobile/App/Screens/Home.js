@@ -80,9 +80,9 @@ const Home = ({
   return (
     <SafeAreaView
       style={{flex: 1, backgroundColor: Colors.whiteBackground}}
-      edges={['top', 'left', 'right']}>
+      edges={['left', 'right']}>
       <>
-        <View style={{paddingHorizontal: 20, marginBottom: 30}}>
+        <View style={{paddingHorizontal: 20, marginBottom: 30, marginTop: 10}}>
           <Text style={{fontSize: 18, fontWeight: '500', marginBottom: 18}}>
             Hey, {user.name}!
           </Text>

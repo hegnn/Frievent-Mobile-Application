@@ -1,9 +1,10 @@
 import React from 'react';
 import {View, Text, SafeAreaView, StyleSheet, Pressable} from 'react-native';
 import {connect} from 'react-redux';
+import {signOut} from '../redux/actions/auth';
 import {Colors, EventColors} from '../utility/Colors';
 
-const Profile = ({user}) => {
+const Profile = ({user, createdEvents, appliedEvents, pastEvents, signOut}) => {
   return (
     <SafeAreaView
       style={{
@@ -38,11 +39,13 @@ const Profile = ({user}) => {
                 marginRight: 15,
               },
             ]}>
-            <Text style={styles.number}>5</Text>
+            <Text style={styles.number}> {createdEvents?.data?.length} </Text>
             <Text style={styles.title}>Created Events</Text>
           </View>
           <View style={styles.counterContainer}>
-            <Text style={styles.number}>11</Text>
+            <Text style={styles.number}>
+              {appliedEvents?.data?.length + pastEvents?.data?.length}
+            </Text>
             <Text style={styles.title}>Applied Events</Text>
           </View>
         </View>
@@ -66,7 +69,7 @@ const Profile = ({user}) => {
           <Text style={styles.value}>**********</Text>
         </View>
       </View>
-      <Pressable style={styles.button}>
+      <Pressable style={styles.button} onPress={() => signOut()}>
         <Text
           style={{
             fontWeight: 'bold',
@@ -115,8 +118,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   user: state.auth.data,
+  createdEvents: state.events.createdEvents,
+  appliedEvents: state.events.appliedEvents,
+  pastEvents: state.events.pastEvents,
 });
 
-const mapDispatchToProps = dispatch => ({});
+const mapDispatchToProps = dispatch => ({
+  signOut: () => dispatch(signOut()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

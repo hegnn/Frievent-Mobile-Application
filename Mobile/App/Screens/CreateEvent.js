@@ -115,16 +115,13 @@ const CreateEvent = ({
                         fontWeight: 'bold',
                         paddingLeft: 0,
                       }}
-                      buttonTextStyle={[
-                        styles.input,
-                        {
-                          fontSize: 17,
-                          textAlign: 'left',
-                          marginLeft: 0,
-                          fontWeight: 'bold',
-                          color: 'black',
-                        },
-                      ]}
+                      buttonTextStyle={{
+                        fontSize: 17,
+                        textAlign: 'left',
+                        marginLeft: 0,
+                        fontWeight: 'bold',
+                        color: 'black',
+                      }}
                     />
                     <Divider />
 

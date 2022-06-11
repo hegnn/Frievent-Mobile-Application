@@ -1,79 +1,96 @@
-import { Formik } from "formik";
-import React, { useState } from "react";
-import { View, Text, SafeAreaView, Pressable, StyleSheet } from "react-native";
-import FormInput from "../Components/FormInput";
-import { connect } from "react-redux";
-import { signUp } from "../redux/actions/auth";
+import {Formik} from 'formik';
+import React, {useState} from 'react';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  Pressable,
+  StyleSheet,
+  Image,
+} from 'react-native';
+import FormInput from '../Components/FormInput';
+import {connect} from 'react-redux';
+import {signUp} from '../redux/actions/auth';
+import {Colors, EventColors} from '../utility/Colors';
+import Logo from '../Assets/Logo.png';
 
-const Register = ({ navigation, signUp }) => {
+const Register = ({navigation, signUp}) => {
   const [hidePassword, setHidePassword] = useState(true);
 
   return (
     <SafeAreaView style={styles.container}>
+      <Image
+        source={Logo}
+        style={{
+          height: 200,
+          resizeMode: 'contain',
+          alignSelf: 'center',
+        }}
+      />
       <Formik
         initialValues={{
-          email: "",
-          password: "",
-          repassword: "",
-          name: "",
-          surname: "",
+          email: '',
+          password: '',
+          repassword: '',
+          name: '',
+          surname: '',
         }}
-        onSubmit={(values) => signUp(values)}
-        //onSubmit={values => axios.get("http://172.20.10.2:8080/users")
-        //.then(res => console.log(res))
-        //.catch(err => console.log("errrrrrrr", err))
-        //}
-      >
-        {({ values, handleChange, handleSubmit }) => {
+        onSubmit={values => signUp(values)}>
+        {({values, handleChange, handleSubmit}) => {
           return (
-            <View style={{ paddingHorizontal: 20 }}>
+            <View style={{paddingHorizontal: 20}}>
               <FormInput
-                placeholder={"Username / Email"}
-                containerStyle={styles.inputContainer}
+                placeholder={'Username / Email'}
                 value={values.email}
-                onChangeText={handleChange("email")}
-                inputStyle={styles.input}
+                onChangeText={handleChange('email')}
+                title="Email"
+                autoCapitalize={false}
               />
               <FormInput
-                placeholder={"Name"}
+                placeholder={'Name'}
                 containerStyle={styles.inputContainer}
                 value={values.name}
-                onChangeText={handleChange("name")}
+                onChangeText={handleChange('name')}
                 inputStyle={styles.input}
+                title="Name"
               />
               <FormInput
-                placeholder={"Surname"}
+                placeholder={'Surname'}
                 containerStyle={styles.inputContainer}
                 value={values.surname}
-                onChangeText={handleChange("surname")}
+                onChangeText={handleChange('surname')}
                 inputStyle={styles.input}
+                title="Surname"
               />
               <FormInput
-                placeholder={"Password"}
+                placeholder={'Password'}
                 hidePassword={hidePassword}
                 setHidePassword={() => setHidePassword(!hidePassword)}
                 containerStyle={styles.inputContainer}
                 value={values.password}
-                onChangeText={handleChange("password")}
+                onChangeText={handleChange('password')}
                 inputStyle={styles.input}
+                title="Password"
+                autoCapitalize={false}
               />
               <FormInput
-                placeholder={"Confirm Password"}
+                placeholder={'Confirm Password'}
                 hidePassword={hidePassword}
                 setHidePassword={() => setHidePassword(!hidePassword)}
                 containerStyle={styles.inputContainer}
                 value={values.repassword}
-                onChangeText={handleChange("repassword")}
+                onChangeText={handleChange('repassword')}
                 inputStyle={styles.input}
+                title="Confirm Password"
+                autoCapitalize={false}
               />
               <Pressable style={styles.signInButton} onPress={handleSubmit}>
-                <Text style={{ color: "#4766ff" }}> REGISTER </Text>
+                <Text style={{color: Colors.whiteBackground}}> REGISTER </Text>
               </Pressable>
               <Pressable
                 style={styles.signUpButton}
-                onPress={() => navigation.navigate("Login")}
-              >
-                <Text style={{ color: "#fccc5e" }}> LOGIN </Text>
+                onPress={() => navigation.navigate('Login')}>
+                <Text style={{color: EventColors.green}}> LOGIN </Text>
               </Pressable>
             </View>
           );
@@ -83,39 +100,33 @@ const Register = ({ navigation, signUp }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   data: state.data,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  signUp: (payload) => dispatch(signUp(payload)),
+const mapDispatchToProps = dispatch => ({
+  signUp: payload => dispatch(signUp(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#4766ff",
+    backgroundColor: Colors.whiteBackground,
     flex: 1,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
-  inputContainer: {
-    borderWidth: 1,
-    borderColor: "gray",
-    backgroundColor: "#f2f8ff",
-  },
-  input: { color: "#272a31" },
   signInButton: {
-    backgroundColor: "#fccc5e",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: EventColors.green,
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 15,
     borderRadius: 15,
     marginVertical: 5,
   },
   signUpButton: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     padding: 15,
     borderRadius: 15,
     marginVertical: 5,

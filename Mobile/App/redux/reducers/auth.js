@@ -1,16 +1,16 @@
-import { authTypes } from "../types/auth";
+import {authTypes} from '../types/auth';
 
 const INITAL_STATE = {
   loading: false,
   error: false,
   isLoggedIn: false,
-  data: [],
+  data: {},
 };
 
 export default reducer = (state = INITAL_STATE, action) => {
   switch (action.type) {
     case authTypes.SIGN_IN:
-      return { ...state, loading: true };
+      return {...state, loading: true};
     case authTypes.SIGN_IN_SUCCESS:
       return {
         ...state,
@@ -28,7 +28,7 @@ export default reducer = (state = INITAL_STATE, action) => {
         data: action.payload,
       };
     case authTypes.SIGN_UP:
-      return { ...state, loading: true };
+      return {...state, loading: true};
     case authTypes.SIGN_UP_SUCCESS:
       return {
         ...state,
@@ -44,6 +44,10 @@ export default reducer = (state = INITAL_STATE, action) => {
         error: true,
         isLoggedIn: false,
         data: action.payload,
+      };
+    case authTypes.SIGN_OUT:
+      return {
+        INITAL_STATE,
       };
     default:
       return state;

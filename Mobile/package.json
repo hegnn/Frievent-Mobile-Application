@@ -26,7 +26,7 @@
     "react-native-reanimated": "^2.8.0",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
-    "react-native-select-dropdown": "^1.8.0",
+    "react-native-select-dropdown": "^2.0.3",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6",

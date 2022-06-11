@@ -8,12 +8,12 @@ import {
   Pressable,
   ScrollView,
 } from 'react-native';
-import SelectDropdown from 'react-native-select-dropdown';
 import {connect} from 'react-redux';
 import Event from '../Components/Event';
 import {getEvents, joinEvent} from '../redux/actions/events';
 import {Colors, EventColors} from '../utility/Colors';
 import BottomSheet from '@gorhom/bottom-sheet';
+import Loader from '../Components/Loader';
 
 const Events = ({navigation, getEvents, events, user, joinEvent}) => {
   const [allEvents, setAllEvents] = useState([]);
@@ -144,51 +144,45 @@ const Events = ({navigation, getEvents, events, user, joinEvent}) => {
         snapPoints={snapPoints}>
         <View></View>
       </BottomSheet>
-
-      {loading ? (
-        <View style={{flex: 1, backgroundColor: 'red'}}>
-          <Text>LOADING</Text>
+      {loading && <Loader />}
+      <>
+        <View
+          style={{
+            flexDirection: 'row',
+            paddingHorizontal: 15,
+          }}>
+          <Pressable
+            style={[
+              styles.sortAndFilterButton,
+              {
+                marginRight: 15,
+              },
+            ]}
+            onPress={() => sortingSheetRef.current?.snapToIndex(0)}>
+            <Text style={styles.sortAndFilterTitle}> SORT </Text>
+          </Pressable>
+          <Pressable
+            style={styles.sortAndFilterButton}
+            onPress={() => filterSheetRef.current?.snapToIndex(0)}>
+            <Text style={styles.sortAndFilterTitle}> FILTER </Text>
+          </Pressable>
         </View>
-      ) : (
-        <>
-          <View
-            style={{
-              flexDirection: 'row',
-              paddingHorizontal: 15,
-            }}>
-            <Pressable
-              style={[
-                styles.sortAndFilterButton,
-                {
-                  marginRight: 15,
-                },
-              ]}
-              onPress={() => sortingSheetRef.current?.snapToIndex(0)}>
-              <Text style={styles.sortAndFilterTitle}> SORT </Text>
-            </Pressable>
-            <Pressable
-              style={styles.sortAndFilterButton}
-              onPress={() => filterSheetRef.current?.snapToIndex(0)}>
-              <Text style={styles.sortAndFilterTitle}> FILTER </Text>
-            </Pressable>
-          </View>
-          <FlatList
-            data={allEvents}
-            renderItem={renderItem}
-            contentContainerStyle={{padding: 15}}
-            onEndReached={async () => {
-              const eventList =
-                events.events.hasMore &&
-                (await getEvents({
-                  offset: allEvents.length,
-                  sortKey,
-                  sortValue,
-                }));
-              eventList && setAllEvents([...allEvents, ...eventList.data]);
-            }}
-          />
-        </>
-      )}
+        <FlatList
+          data={allEvents}
+          renderItem={renderItem}
+          contentContainerStyle={{padding: 15}}
+          onEndReached={async () => {
+            const eventList =
+              events.events.hasMore &&
+              (await getEvents({
+                offset: allEvents.length,
+                sortKey,
+                sortValue,
+              }));
+            eventList && setAllEvents([...allEvents, ...eventList.data]);
+          }}
+        />
+      </>
     </SafeAreaView>
   );
 };
